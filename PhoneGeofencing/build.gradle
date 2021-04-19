@@ -2,7 +2,7 @@ plugins {
     id 'com.android.application'
 }
 
-apply plugin: 'com.google.gms.google-services'
+//apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 30
@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "com.usu.millerkylegeofencing"
-        minSdkVersion 29
+        minSdkVersion 28
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
