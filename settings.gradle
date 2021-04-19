@@ -1,0 +1,3 @@
+include ':API'
+include ':PhoneGeofencing'
+rootProject.name = "Miller_Kyle_Geofencing_App"
