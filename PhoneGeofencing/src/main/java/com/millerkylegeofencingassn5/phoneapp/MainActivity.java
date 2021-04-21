@@ -2,12 +2,19 @@ package com.millerkylegeofencingassn5.phoneapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 
+import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mapbox.geojson.Point;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.geometry.LatLng;
@@ -25,6 +32,7 @@ import com.millerkylegeofencingassn5.api.Verify;
 public class MainActivity extends AppCompatActivity {
 
     private MapView mapView;
+    private boolean isFencing;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,10 +89,40 @@ public class MainActivity extends AppCompatActivity {
 
                     }
                 });
-
-
             }
         });
+
+        // geo-fencing controls
+        MaterialToolbar toolbar = findViewById(R.id.topBar);
+        MaterialButton finishButton = new MaterialButton(this);
+        finishButton.setIcon(ContextCompat.getDrawable(this, R.drawable.ic_baseline_check_24));
+        finishButton.setOnClickListener(view -> {
+            // calculate area and display on screen
+            // clear array
+            isFencing = false;
+            toolbar.removeView(finishButton);
+            System.out.println("<-------------------- FINISHED AREA -------------------->");
+        });
+
+        isFencing = false;
+
+        // start new geo-fence area
+        FloatingActionButton pointButton = findViewById(R.id.pointButton);
+        pointButton.setOnClickListener(view -> {
+            if(!isFencing) {
+                isFencing = true;
+                toolbar.addView(finishButton);
+                // create array
+                System.out.println("<-------------------- STARTED AREA -------------------->");
+            }
+            else{
+                // add point to array
+                System.out.println("<-------------------- RECORDED NEW POINT -------------------->");
+            }
+        });
+
+        // finish go-fence area
+
 
     }
 }

@@ -2,9 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
 <!--    <item-->
-<!--        android:id="@+id/log_out"-->
-<!--        android:icon="@drawable/ic_baseline_login_24"-->
-<!--        android:title="Log Out"-->
+<!--        android:id="@+id/finish_area"-->
+<!--        android:icon="@drawable/ic_baseline_check_24"-->
+<!--        android:title="Finish Area"-->
+<!--        -->
 <!--        />-->
 
 </menu>
