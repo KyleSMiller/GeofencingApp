@@ -170,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
 
                                 // add starting location
                                 points.add(Point.fromLngLat(userLocation.getLongitude(), userLocation.getLatitude()));
-                                geoFenceViewModel.addPoint(userLocation.getLatitude(), userLocation.getLatitude());
+                                geoFenceViewModel.addOrigin(userLocation.getLatitude(), userLocation.getLatitude());
 
                                 System.out.println("<---------------------------------------- STARTED AREA ---------------------------------------->");
                             }
