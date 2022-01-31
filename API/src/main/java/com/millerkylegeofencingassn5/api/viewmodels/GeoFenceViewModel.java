@@ -44,7 +44,19 @@ public class GeoFenceViewModel extends ViewModel {
         if (area == 0.0){
             area = calculateArea();
         }
-        return area;
+        return Math.floor(area * 100) / 100;  // round to two decimal places
+    }
+
+    /**
+     * Get the area of the geo-fence in square feet
+     * @return  the area of the geo-fence in square feet
+     */
+    public double getAreaSqFt(){
+        if (area == 0.0){
+            area = calculateArea();
+        }
+        double rounded = Math.floor(area * 100) / 100;  // round to two decimal places
+        return rounded * 10.76;
     }
 
     /**

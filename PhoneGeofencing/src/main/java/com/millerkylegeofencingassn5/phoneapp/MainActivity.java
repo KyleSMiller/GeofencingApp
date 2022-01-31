@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
@@ -64,6 +65,9 @@ public class MainActivity extends AppCompatActivity {
             requestPermissions(new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, 1);
         }
 
+        TextView areaText = findViewById(R.id.area_display);
+        areaText.setText("Area: ");
+
         // Map
         mapView = findViewById(R.id.map);
         mapView.onCreate(savedInstanceState);
@@ -106,31 +110,6 @@ public class MainActivity extends AppCompatActivity {
                                 .build();
 
 
-//                        // draw lines between user-defined points to fence out the area
-//                        GeoJsonSource source = new GeoJsonSource("points",
-//                                FeatureCollection.fromFeatures(new Feature[]{
-//                                        Feature.fromGeometry(LineString.fromLngLats(points))
-//                                })
-//                        );
-//                        style.addSource(source);
-//                        style.addLayer(new LineLayer("line-layer", "points").withProperties(
-//                                PropertyFactory.lineDasharray(new Float[] {0.0f, 2f}),
-//                                PropertyFactory.lineCap(Property.LINE_CAP_ROUND),
-//                                PropertyFactory.lineJoin(Property.LINE_JOIN_ROUND),
-//                                PropertyFactory.lineWidth(5f),
-//                                PropertyFactory.lineColor(Color.parseColor("#00A6FF"))
-//                        ));
-
-
-
-
-
-
-
-
-
-
-
 
                         // track user location
                         LocationManager manager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
@@ -152,7 +131,10 @@ public class MainActivity extends AppCompatActivity {
                             // calculate area and display on screen
                             isFencing = false;
                             toolbar.removeView(finishButton);
-                            System.out.println("<---------------------------------------- FINISHED AREA ---------------------------------------->");
+                            System.out.println("<------------- FINISHED AREA ------------->");
+                            System.out.println("<------------- " + geoFenceViewModel.getAreaSqFt() + " ------------->");
+                            String areaDisplay = "Area: " + geoFenceViewModel.getAreaSqFt() + " ft²";  // have to do this on a separate line or Android yells at me
+                            areaText.setText(areaDisplay);
                         });
 
                         isFencing = false;
@@ -163,6 +145,7 @@ public class MainActivity extends AppCompatActivity {
                             if(!isFencing) {
                                 isFencing = true;
                                 toolbar.addView(finishButton);
+                                areaText.setText("Area: ");
 
                                 // clear points
                                 points.clear();
@@ -172,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
                                 points.add(Point.fromLngLat(userLocation.getLongitude(), userLocation.getLatitude()));
                                 geoFenceViewModel.addOrigin(userLocation.getLatitude(), userLocation.getLatitude());
 
-                                System.out.println("<---------------------------------------- STARTED AREA ---------------------------------------->");
+                                System.out.println("<------------- STARTED AREA ------------->");
                             }
                             else{
                                 // add point area
@@ -198,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
                                         PropertyFactory.lineColor(Color.parseColor("#00A6FF"))
                                 ));
 
-                                System.out.println("<---------------------------------------- RECORDED NEW POINT ---------------------------------------->");
+                                System.out.println("<------------- RECORDED NEW POINT ------------->");
                             }
                         });
 
